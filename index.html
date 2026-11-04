@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trama Urbana | Ropa</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,800;1,500&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --negro: #14100d;
+      --carbon: #1f1915;
+      --crema: #f3e9dc;
+      --oro: #d4a24c;
+      --chile: #c8452d;
+      --titulo: 'Playfair Display', Georgia, serif;
+      --texto: 'Lato', 'Segoe UI', Arial, sans-serif;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--texto); background: var(--negro); color: var(--crema); line-height: 1.7; }
+
+    /* ---------- Barra superior (flota sobre la portada) ---------- */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 20; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; padding: 18px 5%; background: linear-gradient(to bottom, rgba(20,16,13,.9), rgba(20,16,13,0)); }
+    nav .logo { font-family: var(--titulo); font-size: 1.4rem; font-weight: 800; color: var(--oro); letter-spacing: 1px; text-decoration: none; }
+    nav .enlaces a { color: var(--crema); text-decoration: none; margin-left: 28px; font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; padding-bottom: 4px; border-bottom: 2px solid transparent; transition: .2s; }
+    nav .enlaces a:hover { color: var(--oro); border-color: var(--oro); }
+
+    /* ---------- Portada a pantalla completa ---------- */
+    .portada { min-height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; padding: 120px 20px 80px;
+      background: linear-gradient(rgba(20,16,13,.65), rgba(20,16,13,.9)), url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=1600') center/cover, var(--carbon); }
+    .portada .creador { font-size: 0.8rem; letter-spacing: 3px; text-transform: uppercase; color: var(--oro); margin-bottom: 18px; }
+    .portada h1 { font-family: var(--titulo); font-size: clamp(2.8rem, 9vw, 6rem); font-weight: 800; line-height: 1.05; margin-bottom: 20px; }
+    .portada h1 span { color: var(--chile); font-style: italic; font-weight: 500; }
+    .portada p.lema { max-width: 560px; margin: 0 auto 35px; font-weight: 300; font-size: 1.15rem; color: #e5d8c6; }
+    .botones { display: flex; flex-wrap: wrap; gap: 15px; justify-content: center; }
+    .boton { padding: 14px 34px; border: 2px solid var(--oro); background: var(--oro); color: var(--negro); font-family: var(--texto); font-weight: 700; font-size: 0.9rem; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; text-decoration: none; transition: .25s; }
+    .boton:hover { background: transparent; color: var(--oro); }
+    .boton.vacio { background: transparent; color: var(--crema); border-color: var(--crema); }
+    .boton.vacio:hover { background: var(--crema); color: var(--negro); }
+
+    /* ---------- Nuestra historia ---------- */
+    .historia { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; max-width: 1100px; margin: 0 auto; padding: 90px 5% 40px; align-items: center; }
+    .foto-historia { position: relative; height: 420px; border-radius: 4px; overflow: hidden; display: flex; align-items: center; justify-content: center; font-size: 6rem; background: var(--carbon); border: 2px solid var(--oro); box-shadow: 18px 18px 0 var(--chile); }
+    .foto-historia img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    .texto-historia h2 { font-family: var(--titulo); font-size: 2.3rem; line-height: 1.2; margin-bottom: 20px; }
+    .texto-historia p { color: #d9cbb8; margin-bottom: 14px; }
+    .subtitulo.izq { text-align: left; margin-bottom: 12px; }
+    .firma { font-family: var(--titulo); font-style: italic; color: var(--oro) !important; font-size: 1.15rem; }
+
+    /* ---------- Idea del proyecto ---------- */
+    .idea { display: grid; grid-template-columns: 1fr 1.4fr; gap: 50px; max-width: 1100px; margin: 0 auto; padding: 90px 5%; align-items: center; }
+    .idea h2 { font-family: var(--titulo); font-size: 2.6rem; line-height: 1.15; }
+    .idea h2::after { content: ''; display: block; width: 70px; height: 3px; background: var(--chile); margin-top: 18px; }
+    .idea p { margin-bottom: 15px; color: #d9cbb8; }
+    .idea strong { color: var(--oro); }
+
+    /* ---------- Categorías ---------- */
+    .categorias { background: var(--carbon); padding: 80px 5%; }
+    .categorias h2, .menu h2 { font-family: var(--titulo); font-size: 2.4rem; text-align: center; margin-bottom: 8px; }
+    .subtitulo { text-align: center; color: var(--oro); letter-spacing: 3px; text-transform: uppercase; font-size: 0.8rem; margin-bottom: 45px; }
+    .rejilla { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 0; max-width: 1100px; margin: 0 auto; border: 1px solid #3a2f27; }
+    .categoria { background: transparent; border: none; border-right: 1px solid #3a2f27; padding: 40px 20px; color: var(--crema); cursor: pointer; font-family: var(--texto); text-align: center; transition: .3s; }
+    .categoria:last-child { border-right: none; }
+    .categoria .num { display: block; font-family: var(--titulo); font-size: 0.95rem; color: var(--chile); letter-spacing: 3px; }
+    .categoria .emoji { display: block; font-size: 2.6rem; margin: 12px 0; }
+    .categoria h3 { font-family: var(--titulo); font-size: 1.4rem; font-weight: 600; }
+    .categoria:hover { background: var(--chile); }
+    .categoria:hover .num { color: var(--crema); }
+
+    /* ---------- Catálogo ---------- */
+    .menu { display: none; max-width: 1100px; margin: 0 auto; padding: 90px 5%; }
+    .menu.visible { display: block; }
+    .tabs { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 30px; margin-bottom: 50px; }
+    .tab { background: none; border: none; border-bottom: 2px solid transparent; color: #b8a994; font-family: var(--texto); font-size: 0.9rem; letter-spacing: 2px; text-transform: uppercase; padding: 6px 0; cursor: pointer; transition: .2s; }
+    .tab:hover, .tab.activo { color: var(--oro); border-color: var(--oro); }
+    .lista-menu { display: grid; grid-template-columns: repeat(auto-fit, minmax(420px, 1fr)); gap: 30px 60px; }
+    .plato { display: flex; align-items: center; gap: 18px; }
+    .plato .foto { position: relative; flex: 0 0 90px; height: 90px; border-radius: 50%; overflow: hidden; display: flex; align-items: center; justify-content: center; font-size: 2.2rem; background: var(--carbon); border: 2px solid var(--oro); }
+    .plato .foto img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    .plato .datos { flex: 1; }
+    .plato .linea { display: flex; align-items: baseline; gap: 8px; }
+    .plato h3 { font-family: var(--titulo); font-size: 1.2rem; font-weight: 600; }
+    .plato .puntos { flex: 1; border-bottom: 2px dotted #5a4a3d; transform: translateY(-4px); }
+    .plato .precio { font-family: var(--titulo); font-size: 1.15rem; color: var(--oro); font-weight: 600; }
+    .plato .tipo { font-size: 0.78rem; letter-spacing: 2px; text-transform: uppercase; color: #8d7e6c; }
+
+    /* ---------- Pie de página ---------- */
+    footer { background: #0c0907; border-top: 3px solid var(--chile); padding: 60px 5% 25px; }
+    .columnas { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 35px; max-width: 1100px; margin: 0 auto; }
+    footer h3 { font-family: var(--titulo); color: var(--oro); font-size: 1.3rem; margin-bottom: 12px; }
+    footer p { color: #cbbda9; margin-bottom: 4px; }
+    footer a { color: var(--crema); text-decoration: none; }
+    footer a:hover { color: var(--oro); }
+    footer small { display: block; text-align: center; margin-top: 45px; color: #7d6f60; letter-spacing: 1px; }
+
+    @media (max-width: 800px) {
+      .idea, .historia { grid-template-columns: 1fr; }
+      .foto-historia { height: 300px; box-shadow: 10px 10px 0 var(--chile); }
+      .lista-menu { grid-template-columns: 1fr; }
+      nav .enlaces a { margin: 0 14px 0 0; }
+      .categoria { border-right: none; border-bottom: 1px solid #3a2f27; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a class="logo" href="#inicio">Trama Urbana</a>
+    <div class="enlaces">
+      <a href="#inicio">Inicio</a>
+      <a href="#historia">Historia</a>
+      <a href="#categorias">Categorías</a>
+      <a onclick="mostrarCatalogo('Todo')">Catálogo</a>
+      <a href="#contacto">Contacto</a>
+    </div>
+  </nav>
+
+  <header class="portada" id="inicio">
+    <div>
+      <p class="creador">Creado por: Luciana Dellschersff 11-5</p>
+      <h1>Trama <span>Urbana</span></h1>
+      <p class="lema">Ropa con identidad, diseñada y confeccionada en el corazón de Medellín.</p>
+      <div class="botones">
+        <button class="boton" onclick="mostrarCatalogo('Todo')">Conoce nuestro catálogo</button>
+        <a class="boton vacio" href="#contacto">Visítanos</a>
+      </div>
+    </div>
+  </header>
+
+  <section class="historia" id="historia">
+    <div class="foto-historia"><span>🧵</span><img src="https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?w=900" alt="Taller de confección" onerror="this.remove()"></div>
+    <div class="texto-historia">
+      <p class="subtitulo izq">Nuestra historia</p>
+      <h2>Un taller de barrio que se volvió marca</h2>
+      <p>Trama Urbana nació en 2015 en un pequeño taller de confección de Medellín, donde la familia Restrepo cosía camisetas y chaquetas para los amigos y vecinos del barrio.</p>
+      <p>Con los años, las prendas empezaron a pasar de mano en mano y el taller abrió su propia tienda. Hoy seguimos cuidando cada costura, usando telas de calidad y diseñando ropa cómoda para el día a día.</p>
+      <p class="firma">— La familia Trama Urbana</p>
+    </div>
+  </section>
+
+  <section class="idea">
+    <h2>Idea del proyecto</h2>
+    <div>
+      <p>Trama Urbana es una tienda de ropa con una página donde los clientes pueden ver el catálogo, conocer los precios y encontrar la prenda que más les gusta desde cualquier dispositivo.</p>
+      <p>La idea es desarrollar la página en <strong>React</strong>, con componentes para el catálogo, el selector de tallas y la galería de prendas.</p>
+    </div>
+  </section>
+
+  <section class="categorias" id="categorias">
+    <h2>Nuestras categorías</h2>
+    <p class="subtitulo">Elige por dónde empezar</p>
+    <div class="rejilla">
+      <button class="categoria" onclick="mostrarCatalogo('Camisetas')"><span class="num">01</span><span class="emoji">👕</span><h3>Camisetas</h3></button>
+      <button class="categoria" onclick="mostrarCatalogo('Pantalones')"><span class="num">02</span><span class="emoji">👖</span><h3>Pantalones</h3></button>
+      <button class="categoria" onclick="mostrarCatalogo('Chaquetas')"><span class="num">03</span><span class="emoji">🧥</span><h3>Chaquetas</h3></button>
+      <button class="categoria" onclick="mostrarCatalogo('Accesorios')"><span class="num">04</span><span class="emoji">🧢</span><h3>Accesorios</h3></button>
+    </div>
+  </section>
+
+  <section class="menu" id="catalogo">
+    <h2>Nuestro catálogo</h2>
+    <p class="subtitulo">Ropa hecha para usarse</p>
+    <div class="tabs" id="filtros"></div>
+    <div class="lista-menu" id="productos"></div>
+  </section>
+
+  <footer id="contacto">
+    <div class="columnas">
+      <div>
+        <h3>Contacto</h3>
+        <p>📧 <a href="mailto:hola@tramaurbana.com">hola@tramaurbana.com</a></p>
+        <p>📱 +57 312 555 0147</p>
+      </div>
+      <div>
+        <h3>Horario</h3>
+        <p>🕒 Lunes a sábado</p>
+        <p>10:00 am – 8:00 pm</p>
+      </div>
+      <div>
+        <h3>Ubicación</h3>
+        <p>📍 Medellín, Colombia</p>
+      </div>
+    </div>
+    <small>© 2026 Trama Urbana. Todos los derechos reservados.</small>
+  </footer>
+
+  <script>
+    const U = id => `https://images.unsplash.com/photo-${id}?w=300&h=300&fit=crop`;
+
+    // Fotos de Unsplash. Si alguna no carga, se muestra el emoji.
+    // Para usar fotos propias, cambia el "img" por una ruta local (ej. 'img/camiseta.jpg').
+    const prendas = [
+      { nombre: 'Camiseta Básica Blanca', tipo: 'Camisetas', precio: 39000, emoji: '👕', img: U('1521572163474-6864f9cf17ab') },
+      { nombre: 'Camiseta Oversize Estampada', tipo: 'Camisetas', precio: 59000, emoji: '👕', img: U('1576566588028-4147f3842f27') },
+      { nombre: 'Camisa de Lino', tipo: 'Camisetas', precio: 79000, emoji: '👔', img: U('1596755094514-f87e34085b2c') },
+      { nombre: 'Jean Clásico Azul', tipo: 'Pantalones', precio: 99000, emoji: '👖', img: U('1542272604-787c3835535d') },
+      { nombre: 'Pantalón Cargo', tipo: 'Pantalones', precio: 109000, emoji: '👖', img: U('1624378439575-d8705ad7ae80') },
+      { nombre: 'Jogger Deportivo', tipo: 'Pantalones', precio: 69000, emoji: '🩳', img: U('1552902865-b72c031ac5ea') },
+      { nombre: 'Chaqueta de Jean', tipo: 'Chaquetas', precio: 139000, emoji: '🧥', img: U('1551028719-00167b16eac5') },
+      { nombre: 'Hoodie de Algodón', tipo: 'Chaquetas', precio: 99000, emoji: '🧥', img: U('1556821840-3a63f95609a7') },
+      { nombre: 'Rompevientos Ligero', tipo: 'Chaquetas', precio: 119000, emoji: '🧥', img: U('1591047139829-d91aecb6caea') },
+      { nombre: 'Gorra Urbana', tipo: 'Accesorios', precio: 35000, emoji: '🧢', img: U('1588850561407-ed78c282e89b') },
+      { nombre: 'Mochila de Lona', tipo: 'Accesorios', precio: 89000, emoji: '🎒', img: U('1553062407-98eeb64c6a62') },
+      { nombre: 'Bufanda de Lana', tipo: 'Accesorios', precio: 45000, emoji: '🧣', img: U('1520903920243-00d872a2d1c9') }
+    ];
+
+    const categorias = ['Todo', 'Camisetas', 'Pantalones', 'Chaquetas', 'Accesorios'];
+    const formato = n => '$' + n.toLocaleString('es-CO');
+
+    function mostrarCatalogo(filtro) {
+      document.getElementById('catalogo').classList.add('visible');
+
+      document.getElementById('filtros').innerHTML = categorias.map(c =>
+        `<button class="tab ${c === filtro ? 'activo' : ''}" onclick="mostrarCatalogo('${c}')">${c}</button>`
+      ).join('');
+
+      const lista = filtro === 'Todo' ? prendas : prendas.filter(p => p.tipo === filtro);
+      document.getElementById('productos').innerHTML = lista.map(p => `
+        <article class="plato">
+          <div class="foto"><span>${p.emoji}</span><img src="${p.img}" alt="${p.nombre}" onerror="this.remove()"></div>
+          <div class="datos">
+            <div class="linea">
+              <h3>${p.nombre}</h3>
+              <span class="puntos"></span>
+              <span class="precio">${formato(p.precio)}</span>
+            </div>
+            <div class="tipo">${p.tipo}</div>
+          </div>
+        </article>`).join('');
+
+      document.getElementById('catalogo').scrollIntoView({ behavior: 'smooth' });
+    }
+  </script>
+
+</body>
+</html>
